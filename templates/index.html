@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box">
+            <h1>AI Interview Prep</h1>
+
+            <form method="POST" action="/index">
+                <label>Job Role:</label>
+                <input type="text" name="job_role" required>
+
+                <label>Difficulty:</label>
+                <select name="difficulty">
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
+
+                <button type="submit">Start Interview</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© <span id="year"></span> Interviewprep. p.m. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

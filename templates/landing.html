@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Prep AI</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/job1.gif') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            font-family: Georgia, serif;
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin: 1em 0 0.5em 0;
+            color: #343434;
+            font-weight: normal;
+            font-family: 'Ultra', sans-serif;   
+            font-size: 38px;
+            line-height: 42px;
+            text-transform: uppercase;
+            text-shadow: 0 2px white, 0 3px #777;
+        }
+        p {
+            font-size: 20px;
+            color: #555;
+        }
+        .button-30 {
+        align-items: center;
+        appearance: none;
+        background-image: none;
+        border-radius: 4px;
+        border-width: 0;
+        box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#d1d1ff1f 0 -3px 0 inset;
+        box-sizing: border-box;
+        color: #36395a;
+        cursor: pointer;
+        display: inline-flex;
+        font-family: "JetBrains Mono",monospace;
+        height: 48px;
+        justify-content: center;
+        line-height: 1;
+        list-style: none;
+        overflow: hidden;
+        padding-left: 16px;
+        padding-right: 16px;
+        position: relative;
+        text-align: left;
+        text-decoration: none;
+        transition: box-shadow .15s,transform .15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        will-change: box-shadow,transform;
+        font-size: 18px;
+        }
+
+        .button-30:focus {
+        box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+        }
+
+        .button-30:hover {
+        box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+        transform: translateY(-2px);
+        }
+
+        .button-30:active {
+        box-shadow: #D6D6E7 0 3px 7px inset;
+        transform: translateY(2px);
+        }
+
+        footer {
+        position: fixed;  
+        bottom: 10px;  
+        width: 100%;
+        text-align: center;
+        font-size: 6px;  
+        color: #666;
+        padding: 5px 0;
+        background: rgba(255, 255, 255, 0.5);  
+        }
+    </style>
+</head>
+<body>
+    <h1>Are You Preparing for a New Job?</h1>
+    <br> 
+    <p>Use this AI-powered interview prep questionnaire to practice for your dream job!</p>
+    <a href="/index">
+        <button class="button-30">Get Started</button>
+    </a> 
+<br>
+    <footer>
+        <p>© <span id="year"></span> Interviewprep. p.m. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

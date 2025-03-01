@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box">
+            <h1>AI Interview Chat</h1>
+            <div id="chat-messages"></div>
+            <div id="typing-indicator" class="chat-message ai" style="display: none;">
+                <p>🤖 AI is typing...</p>
+            </div>
+            <form id="chat-form">
+                <input type="text" id="user-message" placeholder="Type your answer..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var socket = io();
+
+        document.getElementById("chat-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var message = document.getElementById("user-message").value;
+
+            let chatBox = document.getElementById("chat-messages");
+            chatBox.innerHTML += `<div class="chat-message user"><p><strong>You:</strong> ${message}</p></div>`;
+
+            socket.emit("send_message", { message: message });
+            document.getElementById("user-message").value = "";  
+        });
+
+        socket.on("receive_message", function(data) {
+            var chatBox = document.getElementById("chat-messages");
+            chatBox.innerHTML += `<div class="chat-message ai"><p><strong>AI:</strong> ${data.message}</p></div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;  
+        });
+
+        socket.on("redirect", function(data) {
+        window.location.href = data.url;  
+        });
+
+        socket.on("show_typing", function(data) {
+            var typingIndicator = document.getElementById("typing-indicator");
+            typingIndicator.style.display = data.status ? "block" : "none";
+        });
+    </script>
+</body>
+</html>

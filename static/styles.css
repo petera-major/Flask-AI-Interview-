@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background-image: url("/static/images/aibackground.jpg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.chat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 900px;
+    height: 80vh;  /* Keeps chatbox fixed in height */
+}
+
+/* Chat box */
+.chat-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Chat messages */
+#chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 60vh;
+    padding: 10px;
+}
+
+/* Chat form */
+.chat-form {
+    margin-top: 10px;
+}
+
+/* Typing Indicator */
+#typing-indicator {
+    font-style: italic;
+    color: gray;
+    text-align: left;
+}
+
+/* AI messages */
+.chat-message.ai {
+    background: #e1f5fe;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    text-align: left;
+}
+
+/* User messages */
+.chat-message.user {
+    background: #d1e7dd;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    text-align: right;
+}
+
+button {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+footer {
+    position: fixed;  
+    bottom: 10px;  
+    width: 100%;
+    text-align: center;
+    font-size: 6px;  
+    color: #666;
+    padding: 5px 0;
+    background: rgba(255, 255, 255, 0.5);  /* ✅ Light transparent background */
+}
