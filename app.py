@@ -54,6 +54,7 @@ def handle_message(data):
     if current_index >= len(questions):
         emit("receive_message", {"message": "🎉 You're all set. Hope this helped! Interview completed!"})
         session.clear()
+        emit("redirect", {"url": "/landing"})  
         return
 
     session["answers"].append(user_answer)
@@ -69,4 +70,7 @@ def handle_message(data):
     emit("show_typing", {"status": False})
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    if os.getenv("RAILWAY_ENVIRONMENT"):
+        socketio.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), allow_unsafe_werkzeug=True)
+    else:
+        socketio.run(app, debug=True)
