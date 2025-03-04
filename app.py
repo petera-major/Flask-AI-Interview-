@@ -38,14 +38,21 @@ def chatroom():
     return render_template("chat.html")  
 
 
+@app.route("/test-openai")
+def test_openai():
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": "Say hello"}]
+        )
+        return response.choices[0].message["content"]
+    except openai.error.APIConnectionError:
+        return "🚨 Error: Unable to connect to OpenAI. Railway may be blocking API requests.", 500
+    except openai.error.AuthenticationError:
+        return "🚨 Error: OpenAI API Key is invalid!", 500
+    except openai.error.OpenAIError as e:
+        return f"🚨 OpenAI Error: {str(e)}", 500
 
-@app.route("/check-api-key")
-def check_api_key():
-    api_key = os.getenv("OPENAI_API_KEY")
-    if api_key:
-        return f"✅ OpenAI API Key Loaded: {api_key[:5]}... (hidden for security)"
-    else:
-        return "🚨 OpenAI API Key is MISSING! Check Railway variables!", 500
 
 
 
