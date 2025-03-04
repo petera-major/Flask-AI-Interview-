@@ -70,7 +70,7 @@ def handle_message(data):
     emit("show_typing", {"status": False})
 
 if __name__ == "__main__":
-    if os.getenv("RAILWAY_ENVIRONMENT"):
+    if "RAILWAY_ENVIRONMENT" in os.environ: 
         socketio.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), allow_unsafe_werkzeug=True)
     else:
         socketio.run(app, debug=True)
