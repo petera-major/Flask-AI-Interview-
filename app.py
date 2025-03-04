@@ -37,6 +37,25 @@ def chatroom():
     
     return render_template("chat.html")  
 
+@app.route("/test-openai")
+def test_openai():
+    import openai
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": "Say hello"}]
+        )
+        return response.choices[0].message["content"]
+    except openai.error.APIConnectionError:
+        return "🚨 Error: Unable to connect to OpenAI. Railway may be blocking API requests.", 500
+    except openai.error.OpenAIError as e:
+        return f"🚨 OpenAI Error: {str(e)}", 500
+
+@app.route("/test")
+def test():
+    return "🚀 Flask is running!"
+
+
 @socketio.on("connect")
 def handle_connect():
     emit("receive_message", {"message": "👋 Hi there! Welcome to your AI interview."})
