@@ -38,24 +38,6 @@ def chatroom():
     return render_template("chat.html")  
 
 
-@app.route("/test-openai")
-def test_openai():
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4o",
-            messages=[{"role": "user", "content": "Say hello"}]
-        )
-        return response.choices[0].message["content"]
-    except openai.error.APIConnectionError:
-        return "🚨 Error: Unable to connect to OpenAI. Railway may be blocking API requests.", 500
-    except openai.error.AuthenticationError:
-        return "🚨 Error: OpenAI API Key is invalid!", 500
-    except openai.error.OpenAIError as e:
-        return f"🚨 OpenAI Error: {str(e)}", 500
-
-
-
-
 @socketio.on("connect")
 def handle_connect():
     emit("receive_message", {"message": "👋 Hi there! Welcome to your AI interview."})
@@ -89,7 +71,5 @@ def handle_message(data):
     emit("show_typing", {"status": False})
 
 if __name__ == "__main__":
-    if "RAILWAY_ENVIRONMENT" in os.environ: 
-        socketio.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), allow_unsafe_werkzeug=True)
-    else:
-        socketio.run(app, debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Get PORT from environment
+    socketio.run(app, host="0.0.0.0", port=port, allow_unsafe_werkzeug=True)
