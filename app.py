@@ -19,6 +19,7 @@ def landing():
 
 @app.route("/index", methods=["GET", "POST"])
 def home():
+    print("✅ /index route hit")
     if request.method == "POST":
         job_role = request.form["job_role"]
         difficulty = request.form["difficulty"]
