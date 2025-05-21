@@ -14,6 +14,11 @@ def generate_questions(role, difficulty="Intermediate"):
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}]
     )
+    print("✅ OpenAI response success")
+        return response.choices[0].message.content
+    except Exception as e:
+        print("❌ OpenAI ERROR:", str(e))
+        return "Error: could not generate questions."
 
     return response.choices[0].message.content
 
