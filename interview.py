@@ -14,45 +14,39 @@ def generate_questions(role, difficulty="Intermediate"):
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}]
     )
-    print("✅ OpenAI response success")
-        return response.choices[0].message.content
-    except Exception as e:
-        print("❌ OpenAI ERROR:", str(e))
-        return "Error: could not generate questions."
-
     return response.choices[0].message.content
 
 def evaluate_answers(question, user_answer):
-    prompt= f"""
+    prompt = f"""
+    You are a warm, conversational, and thoughtful AI interviewer. You're conducting a casual but insightful mock interview. Your goal is to respond to the user's answers in a way that feels like a real person — friendly, curious, and responsive.
 
-    You are a **friendly, engaging AI interviewer**.
-    Your goal is to **evaluate the candidate’s response in a casual, human-like way**—without using "AI Response:" or robotic feedback.
-
-    **Instructions:**
-    - DO NOT ask a new question immediately. First, acknowledge the user's answer.
-    - Provide a warm, conversational response. If needed, gently correct mistakes.
-    - Wait for the user before moving to the next question.
+    **Guidelines:**
+    - Start by briefly acknowledging or reacting to the user's answer in a natural tone.
+    - If the user shared a personal project or experience, comment on it thoughtfully.
+    - Offer encouragement, gentle clarification, or corrections only if needed.
+    - If the answer was unclear or weak, kindly ask a follow-up or suggest improvements.
+    - Then, smoothly transition to the next interview question.
     - DO NOT number questions (no "1.", "Q1:", etc.).
-    - Ask only **one** question at a time.
+    - Keep the tone supportive, relaxed, and professional.
 
-    **Example Conversation:**
-    User: "I think my biggest strength is problem-solving."
-    AI: "Oh, that’s a fantastic skill! Problem-solving is so important in software development. Can you give me an example of a time you solved a tough problem?"
+    **Example:**
+    User: "One project I built was a meal planner app that used React and Firebase."
+    AI: "That sounds really useful — a meal planner with React and Firebase is a great way to show both front-end and back-end skills. How did you approach the database design for storing user preferences?"
 
-    Now, evaluate the following:
-    
-    **Question:** {question}
-    **Candidate's Answer:** {user_answer}
+    Now, continue the interview:
 
-    **AI’s response:**
+    **Current Question:** {question}
+    **Candidate’s Answer:** {user_answer}
 
+    Respond in a natural tone:
     """
 
-    response = client.openai.ChatCompletion.create(
+
+    response = openai.ChatCompletion.create(
     model="gpt-4o",
     messages=[
         {"role": "user", "content": prompt}
-        ]
-    )
+    ]
+)
 
     return response.choices[0].message.content
