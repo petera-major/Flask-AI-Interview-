@@ -5,7 +5,7 @@ import random
 
 load_dotenv()
 
-client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_questions(role, difficulty="Intermediate"):
     prompt = f"Generate 6 {difficulty}-level interview questions for a {role} position. Ask them naturally like in a conversation. DO NOT number them (no 'Q1', '1.', etc.)."
