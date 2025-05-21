@@ -10,7 +10,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def generate_questions(role, difficulty="Intermediate"):
     prompt = f"Generate 6 {difficulty}-level interview questions for a {role} position. Ask them naturally like in a conversation. DO NOT number them (no 'Q1', '1.', etc.)."
 
-    response = client.chat.completions.create(
+    response = openai.ChatCompletion.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}]
     )
@@ -43,7 +43,7 @@ def evaluate_answers(question, user_answer):
 
     """
 
-    response = client.chat.completions.create(
+    response = client.openai.ChatCompletion.create(
     model="gpt-4o",
     messages=[
         {"role": "user", "content": prompt}
